@@ -1,9 +1,10 @@
 import React from 'react'
-import { HeaderWrapper, LogoDiv, SearchInput, EnterButton } from './styles'
+import { HeaderWrapper, LogoDiv, SearchInput } from './styles'
 import PawsLogo from '../../assets/paws.svg'
 import { Heading } from '@chakra-ui/react'
 import { ButtonGroup } from '@chakra-ui/react'
 import Login from '../Login/'
+import Cart from '../Cart'
 
 function Header() {
   return (
@@ -16,7 +17,7 @@ function Header() {
       <div>
         <ButtonGroup size="lg" spacing="10">
           <Login />
-          <EnterButton colorScheme="purple">Carrinho</EnterButton>
+          <Cart />
         </ButtonGroup>
       </div>
     </HeaderWrapper>
