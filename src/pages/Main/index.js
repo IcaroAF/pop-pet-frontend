@@ -16,7 +16,7 @@ function Main() {
 
   async function handlePopulateProducts() {
     const response = await axios.get(
-      'http://pop-pet-challenge.herokuapp.com/products',
+      'https://pop-pet-challenge.herokuapp.com/products',
       {
         method: 'GET',
         mode: 'cors',
