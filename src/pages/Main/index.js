@@ -15,7 +15,7 @@ function Main() {
   }, [])
 
   async function handlePopulateProducts() {
-    const response = await axios(
+    const response = await axios.get(
       'http://pop-pet-challenge.herokuapp.com/products',
       {
         method: 'GET',
@@ -25,11 +25,11 @@ function Main() {
         headers: {
           'Content-type': 'application/json',
         },
-        body: JSON.stringify(data),
       }
     )
 
-    const data = await response.json()
+    console.log(response)
+    const data = await response.data
     const formattedProducts = []
 
     //console.log(data)
