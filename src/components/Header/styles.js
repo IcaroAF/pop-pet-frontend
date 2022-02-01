@@ -8,6 +8,7 @@ const HeaderWrapper = styled.header`
   align-items: center;
   background-color: #124162;
   height: 10%;
+  padding: 24px;
 `
 
 const SearchInput = styled(Input)``
