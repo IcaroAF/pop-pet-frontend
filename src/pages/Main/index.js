@@ -1,10 +1,12 @@
 import * as S from './styles'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Header from '../../components/Header'
 import Pets from '../../assets/pets.jpeg'
 import ProductCard from '../../components/Products'
+import { CartContext } from '../../contexts/cartContext'
 
 function Main() {
+  const { cart, setCart } = useContext(CartContext)
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -20,7 +22,7 @@ function Main() {
     const data = await response.json()
     const formattedProducts = []
 
-    console.log(data)
+    //console.log(data)
 
     for (const product of data) {
       formattedProducts.push({
@@ -28,10 +30,42 @@ function Main() {
         name: product.name,
         price: product.price,
         img: product.img,
+        maxAmount: product.amount,
       })
     }
 
     setProducts(formattedProducts)
+  }
+
+  function handleAddProductCart(productID) {
+    const localProducts = [...products]
+    const localCartProducts = [...cart]
+
+    const productIndex = localProducts.findIndex(
+      (product) => product.id === productID
+    )
+
+    const { id, name, img, price, maxAmount } = localProducts[productIndex]
+    console.log(`vou adicionar o produto de id ${id}`)
+    const cartIndex = localCartProducts.findIndex(
+      (product) => product.id === productID
+    )
+
+    if (cartIndex >= 0) {
+      localCartProducts[cartIndex].amount += 1
+      //localCartProducts[cartIndex].maxAmount -= 1
+      setCart([...localCartProducts])
+    } else {
+      const productCart = {
+        id,
+        name,
+        img,
+        price,
+        amount: 1,
+        maxAmount: maxAmount - 1,
+      }
+      setCart([...cart, productCart])
+    }
   }
 
   return (
@@ -40,7 +74,10 @@ function Main() {
       <div>
         <S.TopImg src={Pets} alt="alguns animais domésticos" />
       </div>
-      <ProductCard products={products} />
+      <ProductCard
+        products={products}
+        handleAddProductCart={handleAddProductCart}
+      />
       <h1>Produtos</h1>
     </S.Wrapper>
   )
