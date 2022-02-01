@@ -1,5 +1,6 @@
 import * as S from './styles'
 import React, { useEffect, useState, useContext } from 'react'
+import axios from 'axios'
 import Header from '../../components/Header'
 import Pets from '../../assets/pets.jpeg'
 import ProductCard from '../../components/Products'
@@ -14,9 +15,18 @@ function Main() {
   }, [])
 
   async function handlePopulateProducts() {
-    const response = await fetch(
+    const response = await axios(
       'http://pop-pet-challenge.herokuapp.com/products',
-      { method: 'GET' }
+      {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
     )
 
     const data = await response.json()
