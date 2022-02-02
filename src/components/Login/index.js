@@ -39,6 +39,7 @@ function Login() {
         setToken(response.data.token)
         setUser(response.data.userLogged)
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('user', JSON.stringify(response.data.userLogged))
       }
     } catch (error) {
       return error.message

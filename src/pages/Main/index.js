@@ -74,6 +74,7 @@ function Main() {
         maxAmount: maxAmount - 1,
       }
       setCart([...cart, productCart])
+      localStorage.setItem('cart', JSON.stringify([...cart, productCart]))
     }
   }
 
