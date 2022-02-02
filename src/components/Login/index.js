@@ -49,7 +49,9 @@ function Login() {
 
   function logout() {
     setToken('')
+    setUser()
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
   }
 
   return (

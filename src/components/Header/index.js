@@ -5,14 +5,17 @@ import { Heading } from '@chakra-ui/react'
 import { ButtonGroup } from '@chakra-ui/react'
 import Login from '../Login/'
 import Cart from '../Cart'
+import { Link } from 'react-router-dom'
 
 function Header({ isMain, setFilterProduct, handleFilterProducts }) {
   return (
     <HeaderWrapper>
-      <LogoDiv>
-        <img className="logo" src={PawsLogo} alt="logo pet-pop" />
-        <Heading>Pop Pet</Heading>
-      </LogoDiv>
+      <Link to="/">
+        <LogoDiv>
+          <img className="logo" src={PawsLogo} alt="logo pet-pop" />
+          <Heading>Pop Pet</Heading>
+        </LogoDiv>
+      </Link>
       {isMain && (
         <>
           <SearchInput

@@ -6,6 +6,7 @@ import {
 import React from 'react'
 import Main from './pages/Main'
 import SignUp from './pages/SignUp'
+import Checkout from './pages/Checkout'
 
 function Routes() {
   return (
@@ -13,6 +14,7 @@ function Routes() {
       <Switch>
         <Route path="/" exact element={<Main />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Switch>
     </Router>
   )
