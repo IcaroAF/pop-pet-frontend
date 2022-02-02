@@ -6,7 +6,7 @@ import { ButtonGroup } from '@chakra-ui/react'
 import Login from '../Login/'
 import Cart from '../Cart'
 
-function Header({ isMain }) {
+function Header({ isMain, setFilterProduct, handleFilterProducts }) {
   return (
     <HeaderWrapper>
       <LogoDiv>
@@ -15,7 +15,13 @@ function Header({ isMain }) {
       </LogoDiv>
       {isMain && (
         <>
-          <SearchInput type="text" size="lg" width="70%" />
+          <SearchInput
+            type="text"
+            size="lg"
+            width="70%"
+            onChange={(e) => setFilterProduct(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleFilterProducts()}
+          />
           <div>
             <ButtonGroup size="lg" spacing="10">
               <Login />

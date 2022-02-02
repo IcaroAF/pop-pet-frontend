@@ -13,23 +13,16 @@ import {
 import CartIcon from '../../assets/cart.svg'
 import { ReactComponent as PlusIcon } from '../../assets/plus-icon.svg'
 import { ReactComponent as MinusIcon } from '../../assets/minus-icon.svg'
-import { CartSpam, CartButtonDiv } from './styles'
+import { CartSpam, CartButtonDiv, CartImg } from './styles'
 import { CartContext } from '../../contexts/cartContext'
 import { Flex, IconButton, Text } from '@chakra-ui/react'
 import { formatToBRL } from 'brazilian-values'
-//import { filterMaxAmount } from '../../helpers/maxAmountFilter'
 
 function Cart() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
   const { cart, setCart } = useContext(CartContext)
-  // eslint-disable-next-line no-unused-vars
-  //const [addAmount, setAddAmount] = useState(0)
   const [total, setTotal] = useState(0)
-
-  //console.log(cart)
-  //const localCart = [...cart]
-  //console.log(localCart)
 
   useEffect(() => {
     let sum = 0
@@ -89,7 +82,7 @@ function Cart() {
                   alignContent="space-between"
                   key={product.id}
                 >
-                  <img src={product.img} alt="img-produto" />
+                  <CartImg src={product.img} alt="img-produto" />
                   <Text fontSize="2xl" align="center">
                     {product.name}
                   </Text>

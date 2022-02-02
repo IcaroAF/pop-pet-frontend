@@ -21,5 +21,8 @@ const ControlButton = styled(Button)`
     height: 30px;
   }
 `
+const CartImg = styled.img`
+  width: 150px;
+`
 
-export { CartSpam, CartButtonDiv, ControlButton }
+export { CartSpam, CartButtonDiv, ControlButton, CartImg }

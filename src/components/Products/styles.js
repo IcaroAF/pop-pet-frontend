@@ -25,6 +25,11 @@ const ProductName = styled(Heading)`
 `
 const ProductImg = styled.img`
   width: 70%;
+  margin: auto;
+`
+const InfoButton = styled.button`
+  all: unset;
+  cursor: pointer;
 `
 
-export { DivCard, AddCartButton, ProductImg, ProductName }
+export { DivCard, AddCartButton, InfoButton, ProductImg, ProductName }
