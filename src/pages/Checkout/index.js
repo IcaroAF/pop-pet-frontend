@@ -75,7 +75,7 @@ function Checkout() {
             <FormLabel htmlFor="email">CPF</FormLabel>
             <Input
               id="cpf"
-              defaultValue={user ? user.email : ''}
+              defaultValue={user ? user.cpf : ''}
               placeholder="Somente números"
             />
           </FormControl>
