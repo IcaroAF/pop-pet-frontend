@@ -15,8 +15,9 @@ import { ReactComponent as PlusIcon } from '../../assets/plus-icon.svg'
 import { ReactComponent as MinusIcon } from '../../assets/minus-icon.svg'
 import { CartSpam, CartButtonDiv, CartImg } from './styles'
 import { CartContext } from '../../contexts/cartContext'
-import { Flex, IconButton, Text } from '@chakra-ui/react'
+import { Flex, IconButton, Link, Text } from '@chakra-ui/react'
 import { formatToBRL } from 'brazilian-values'
+import { Link as ReachLink } from 'react-router-dom'
 
 function Cart() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -122,7 +123,11 @@ function Cart() {
             >
               Limpar Carrinho
             </Button>
-            <Button colorScheme="blue">Finalizar Compra</Button>
+            <Button colorScheme="blue">
+              <Link as={ReachLink} to="/checkout">
+                Finalizar Compra
+              </Link>
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
