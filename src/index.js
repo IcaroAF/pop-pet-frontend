@@ -6,21 +6,18 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { CartContextProvider } from './contexts/cartContext'
 import { AuthContextProvider } from './contexts/authContext'
 import { UserContextProvider } from './contexts/userContext'
-import { CookiesProvider } from 'react-cookie'
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <CookiesProvider>
-        <AuthContextProvider>
-          <UserContextProvider>
-            <CartContextProvider>
-              <GlobalStyles />
-              <Routes />
-            </CartContextProvider>
-          </UserContextProvider>
-        </AuthContextProvider>
-      </CookiesProvider>
+      <AuthContextProvider>
+        <UserContextProvider>
+          <CartContextProvider>
+            <GlobalStyles />
+            <Routes />
+          </CartContextProvider>
+        </UserContextProvider>
+      </AuthContextProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
