@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Button, Heading } from '@chakra-ui/react'
 
 const DivCard = styled.div`
-  border: 2px solid red;
   width: 300px;
   display: flex;
   align-items: center;
