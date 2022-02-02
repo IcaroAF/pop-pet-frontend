@@ -80,7 +80,7 @@ function Main() {
 
   return (
     <S.Wrapper>
-      <Header />
+      <Header isMain />
       <div>
         <S.TopImg src={Pets} alt="alguns animais domésticos" />
       </div>
