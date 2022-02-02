@@ -1,6 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from '../../components/Header'
-import { Button, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react'
+import {
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+} from '@chakra-ui/react'
 import { useForm, Controller } from 'react-hook-form'
 import 'react-phone-number-input/style.css'
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form'
@@ -11,9 +18,10 @@ import { useNavigate } from 'react-router-dom'
 
 function SignUp() {
   const { setToken } = useContext(AuthContext)
-  const { setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const { register, handleSubmit, control } = useForm()
   const navigate = useNavigate()
+  const [isChecked, setIsChecked] = useState(false)
 
   const onSubmit = async (data) => {
     try {
@@ -163,6 +171,15 @@ function SignUp() {
               )}
             />
           </FormControl>
+          {user.role === 'admin' && (
+            <Checkbox
+              onChange={() => setIsChecked(!isChecked)}
+              isChecked={isChecked}
+              {...register('role', { required: true })}
+            >
+              Admin
+            </Checkbox>
+          )}
           <Button type="submit">Enviar</Button>
         </form>
       </Flex>
