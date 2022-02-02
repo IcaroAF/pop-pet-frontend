@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom'
 function Admin() {
   const { token } = useContext(AuthContext)
   const [resumeData, setResumeData] = useState({})
-  console.log(resumeData)
 
   useEffect(() => {
     getResume()
@@ -35,7 +34,6 @@ function Admin() {
 
     const data = await response.data
     setResumeData(data)
-    console.log(data)
   }
 
   return (

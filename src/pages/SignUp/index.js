@@ -29,7 +29,6 @@ function SignUp() {
       if (confirm_password !== data.password) {
         console.log('senha n bate')
       }
-      console.log(finalData)
       const response = await axios({
         url: 'https://pop-pet-challenge.herokuapp.com/users',
         method: 'POST',
@@ -41,7 +40,6 @@ function SignUp() {
         data: finalData,
       })
 
-      console.log(response)
       if (response.status === 200) {
         setToken(response.token)
         setUser(response.userLogged)

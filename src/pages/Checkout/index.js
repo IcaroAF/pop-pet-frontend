@@ -20,7 +20,6 @@ function Checkout() {
   const { control } = useForm()
   const { user } = useContext(UserContext)
   const { cart } = useContext(CartContext)
-  console.log(user)
 
   let total = 0
   for (let cartItem of cart) {
@@ -29,7 +28,6 @@ function Checkout() {
 
   const onSubmit = async (cart) => {
     try {
-      console.log(cart)
       const response = await axios({
         url: 'https://pop-pet-challenge.herokuapp.com/products',
         method: 'POST',
@@ -41,9 +39,8 @@ function Checkout() {
         data: cart,
       })
 
-      console.log(response)
       if (response.status === 200) {
-        console.log('vlw')
+        console.log('Requisição válida')
       }
     } catch (error) {
       return error.message
