@@ -14,7 +14,6 @@ function SignUp() {
   const { setUser } = useContext(UserContext)
   const { register, handleSubmit, control } = useForm()
   const navigate = useNavigate()
-  //const [value, setValue] = useState()
 
   const onSubmit = async (data) => {
     try {
@@ -38,6 +37,8 @@ function SignUp() {
       if (response.status === 200) {
         setToken(response.token)
         setUser(response.userLogged)
+        localStorage.setItem('token', response.token)
+        localStorage.setItem('user', JSON.stringify(response?.userLogged))
         navigate('/')
       }
     } catch (error) {

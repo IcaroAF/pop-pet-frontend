@@ -43,6 +43,7 @@ function Cart() {
 
     localCart[indexCart].amount = newAmount
     setCart([...localCart])
+    localStorage.setItem('cart', JSON.stringify([...localCart]))
   }
 
   return (
@@ -111,7 +112,14 @@ function Cart() {
             <Button variant="outline" mr={3} onClick={onClose}>
               Fechar
             </Button>
-            <Button variant="outline" mr={3} onClick={() => setCart([])}>
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={() => {
+                setCart([])
+                localStorage.removeItem('cart')
+              }}
+            >
               Limpar Carrinho
             </Button>
             <Button colorScheme="blue">Finalizar Compra</Button>
