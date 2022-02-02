@@ -25,4 +25,8 @@ const LogoDiv = styled.div`
 
 const EnterButton = styled(Button)``
 
-export { HeaderWrapper, LogoDiv, SearchInput, EnterButton }
+const AdminButton = styled(Button)`
+  background-color: green;
+`
+
+export { HeaderWrapper, LogoDiv, SearchInput, EnterButton, AdminButton }
