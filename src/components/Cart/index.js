@@ -13,7 +13,7 @@ import {
 import CartIcon from '../../assets/cart.svg'
 import { ReactComponent as PlusIcon } from '../../assets/plus-icon.svg'
 import { ReactComponent as MinusIcon } from '../../assets/minus-icon.svg'
-import { CartSpam, CartButtonDiv } from './styles'
+import { CartSpam, CartButtonDiv, CartImg } from './styles'
 import { CartContext } from '../../contexts/cartContext'
 import { Flex, IconButton, Text } from '@chakra-ui/react'
 import { formatToBRL } from 'brazilian-values'
@@ -82,7 +82,7 @@ function Cart() {
                   alignContent="space-between"
                   key={product.id}
                 >
-                  <img src={product.img} alt="img-produto" />
+                  <CartImg src={product.img} alt="img-produto" />
                   <Text fontSize="2xl" align="center">
                     {product.name}
                   </Text>

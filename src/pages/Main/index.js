@@ -39,6 +39,7 @@ function Main() {
         name: product.name,
         price: product.price,
         img: product.img,
+        description: product.description,
         maxAmount: product.amount,
       })
     }
