@@ -9,6 +9,8 @@ import { CartContext } from '../../contexts/cartContext'
 function Main() {
   const { cart, setCart } = useContext(CartContext)
   const [products, setProducts] = useState([])
+  const [displayProduct, setDisplayProduct] = useState([])
+  const [filterProduct, setFilterProduct] = useState('')
 
   useEffect(() => {
     handlePopulateProducts()
@@ -28,11 +30,8 @@ function Main() {
       }
     )
 
-    console.log(response)
     const data = await response.data
     const formattedProducts = []
-
-    //console.log(data)
 
     for (const product of data) {
       formattedProducts.push({
@@ -45,6 +44,7 @@ function Main() {
     }
 
     setProducts(formattedProducts)
+    setDisplayProduct(formattedProducts)
   }
 
   function handleAddProductCart(productID) {
@@ -56,14 +56,12 @@ function Main() {
     )
 
     const { id, name, img, price, maxAmount } = localProducts[productIndex]
-    console.log(`vou adicionar o produto de id ${id}`)
     const cartIndex = localCartProducts.findIndex(
       (product) => product.id === productID
     )
 
     if (cartIndex >= 0) {
       localCartProducts[cartIndex].amount += 1
-      //localCartProducts[cartIndex].maxAmount -= 1
       setCart([...localCartProducts])
     } else {
       const productCart = {
@@ -78,14 +76,33 @@ function Main() {
     }
   }
 
+  function handleFilterProducts() {
+    if (filterProduct !== '') {
+      const localProducts = [...products]
+
+      const filteredProducts = localProducts.filter((product) =>
+        product.name.toLowerCase().includes(filterProduct.toLowerCase())
+      )
+      filteredProducts.length > 0
+        ? setDisplayProduct(filteredProducts)
+        : setDisplayProduct(products)
+    } else {
+      setDisplayProduct(products)
+    }
+  }
+
   return (
     <S.Wrapper>
-      <Header isMain />
+      <Header
+        isMain
+        setFilterProduct={setFilterProduct}
+        handleFilterProducts={handleFilterProducts}
+      />
       <div>
         <S.TopImg src={Pets} alt="alguns animais domésticos" />
       </div>
       <ProductCard
-        products={products}
+        products={displayProduct}
         handleAddProductCart={handleAddProductCart}
       />
       <h1>Produtos</h1>
