@@ -169,7 +169,7 @@ function SignUp() {
               )}
             />
           </FormControl>
-          {user.role === 'admin' && (
+          {user?.role === 'admin' && (
             <Checkbox
               onChange={() => setIsChecked(!isChecked)}
               isChecked={isChecked}
