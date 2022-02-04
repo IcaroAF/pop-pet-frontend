@@ -30,7 +30,7 @@ function Header({ isMain, setFilterProduct, handleFilterProducts }) {
           <div>
             <ButtonGroup size="lg" spacing="10">
               <Login />
-              {user?.role === 'admin' ? (
+              {user?.is_admin ? (
                 <AdminButton>
                   <Link to="/admin">Área do Admin</Link>
                 </AdminButton>

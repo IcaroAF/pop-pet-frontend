@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import Header from '../../components/Header'
 import {
   Button,
@@ -21,7 +21,6 @@ function SignUp() {
   const { user, setUser } = useContext(UserContext)
   const { register, handleSubmit, control } = useForm()
   const navigate = useNavigate()
-  const [isChecked, setIsChecked] = useState(false)
 
   const onSubmit = async (data) => {
     try {
@@ -169,14 +168,22 @@ function SignUp() {
               )}
             />
           </FormControl>
-          {user?.role === 'admin' && (
-            <Checkbox
-              onChange={() => setIsChecked(!isChecked)}
-              isChecked={isChecked}
-              {...register('role', { required: true })}
-            >
-              Admin
-            </Checkbox>
+          {user?.is_admin && (
+            <Controller
+              control={control}
+              name="is_admin"
+              defaultValue={false}
+              render={({ field: { onChange, ref, value } }) => (
+                <Checkbox
+                  onChange={onChange}
+                  textTransform="capitalize"
+                  ref={ref}
+                  isChecked={value}
+                >
+                  Admin
+                </Checkbox>
+              )}
+            />
           )}
           <Button type="submit">Enviar</Button>
         </form>

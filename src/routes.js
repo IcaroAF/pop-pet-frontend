@@ -9,11 +9,12 @@ import Main from './pages/Main'
 import SignUp from './pages/SignUp'
 import Checkout from './pages/Checkout'
 import Admin from './pages/Admin'
+import AddProduct from './pages/AddProducts'
 import { UserContext } from './contexts/userContext'
 
 function ProtectedRoutes({ children }) {
   const { user } = useContext(UserContext)
-  return user?.role === 'admin' ? children : <Navigate to="/" />
+  return user?.is_admin ? children : <Navigate to="/" />
 }
 
 function Routes() {
@@ -28,6 +29,14 @@ function Routes() {
           element={
             <ProtectedRoutes>
               <Admin />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="/admin/addproduct"
+          element={
+            <ProtectedRoutes>
+              <AddProduct />
             </ProtectedRoutes>
           }
         />

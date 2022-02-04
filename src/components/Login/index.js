@@ -76,9 +76,9 @@ function Login() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <LoginInput
                     type="text"
-                    id="email"
-                    placeholder="seuemail@dominio.com"
-                    {...register('email', { required: true })}
+                    id="username"
+                    placeholder="Nome de usuário"
+                    {...register('username', { required: true })}
                   />
                   <LoginInput
                     type="password"
