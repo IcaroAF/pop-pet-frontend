@@ -13,7 +13,8 @@ import {
 import CartIcon from '../../assets/cart.svg'
 import { ReactComponent as PlusIcon } from '../../assets/plus-icon.svg'
 import { ReactComponent as MinusIcon } from '../../assets/minus-icon.svg'
-import { CartSpam, CartButtonDiv, CartImg } from './styles'
+import TrashIcon from '../../assets/trash-icon.svg'
+import { CartSpam, CartButtonDiv, CartImg, ControlButton } from './styles'
 import { CartContext } from '../../contexts/cartContext'
 import { Flex, IconButton, Link, Text } from '@chakra-ui/react'
 import { formatToBRL } from 'brazilian-values'
@@ -43,6 +44,9 @@ function Cart() {
     const newAmount = localCart[indexCart].amount + value
 
     localCart[indexCart].amount = newAmount
+    if (localCart[indexCart].amount === 0) {
+      localCart.splice(indexCart, 1)
+    }
     setCart([...localCart])
     localStorage.setItem('cart', JSON.stringify([...localCart]))
   }
@@ -103,12 +107,18 @@ function Cart() {
                       onClick={() => handleAddAmount(-1, product.id)}
                       icon={<MinusIcon />}
                     />
+                    {product.amount === 1 && (
+                      <ControlButton
+                        onClick={() => handleAddAmount(-1, product.id)}
+                      >
+                        <img src={TrashIcon} />
+                      </ControlButton>
+                    )}
                   </Flex>
                 </Flex>
               ))}
             <Text fontSize="4xl">{formatToBRL(total / 100)}</Text>
           </DrawerBody>
-
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
               Fechar
