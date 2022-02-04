@@ -59,6 +59,9 @@ function Admin() {
         <Button>
           <Link to="/sign-up">Criar usuário</Link>
         </Button>
+        <Button>
+          <Link to="/admin/addproduct">Adicionar produto</Link>
+        </Button>
       </Flex>
     </>
   )
