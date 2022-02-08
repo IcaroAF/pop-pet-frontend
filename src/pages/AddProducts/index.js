@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Header from '../../components/Header'
-import { Button, Flex, FormControl, FormLabel, Input } from '@chakra-ui/react'
+import { FormControl, FormLabel, Input } from '@chakra-ui/react'
+import { FormHeading, FormWrapper, SubmitButton, Wrapper } from './styles'
 import { useForm } from 'react-hook-form'
 import 'react-phone-number-input/style.css'
 import axios from 'axios'
@@ -35,8 +36,9 @@ function AddProduct() {
   return (
     <>
       <Header />
-      <Flex alignContent="center" justifyContent="center">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <Wrapper direction="column" align="center" justify="center">
+        <FormHeading>Adicionar Produto</FormHeading>
+        <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           <FormControl>
             <FormLabel htmlFor="name">Nome:</FormLabel>
             <Input
@@ -85,9 +87,11 @@ function AddProduct() {
               {...register('img', { required: true })}
             />
           </FormControl>
-          <Button type="submit">Enviar</Button>
-        </form>
-      </Flex>
+          <SubmitButton colorScheme="purple" type="submit">
+            Enviar
+          </SubmitButton>
+        </FormWrapper>
+      </Wrapper>
     </>
   )
 }
