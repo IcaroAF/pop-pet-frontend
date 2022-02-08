@@ -1,20 +1,14 @@
 import React, { useContext } from 'react'
 import Header from '../../components/Header'
-import {
-  Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-} from '@chakra-ui/react'
+import { Checkbox, FormControl, FormLabel, Input } from '@chakra-ui/react'
 import { useForm, Controller } from 'react-hook-form'
-import 'react-phone-number-input/style.css'
-import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form'
+//import 'react-phone-number-input/style.css'
+//import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form'
 import axios from 'axios'
 import { AuthContext } from '../../contexts/authContext'
 import { UserContext } from '../../contexts/userContext'
 import { useNavigate } from 'react-router-dom'
+import { FormWrapper, Wrapper, PhoneInput, SubmitButton } from './styles'
 
 function SignUp() {
   const { setToken } = useContext(AuthContext)
@@ -54,8 +48,8 @@ function SignUp() {
   return (
     <>
       <Header />
-      <Flex alignContent="center" justifyContent="center">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <Wrapper align="center" justify="center">
+        <FormWrapper onSubmit={handleSubmit(onSubmit)}>
           <FormControl>
             <FormLabel htmlFor="name">Nome</FormLabel>
             <Input
@@ -157,13 +151,14 @@ function SignUp() {
               control={control}
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
-                <PhoneInputWithCountry
+                <PhoneInput
                   name="phone"
                   control={control}
                   value={value}
                   onChange={onChange}
                   defaultCountry="BR"
                   id="phone"
+                  placeholder="Seu Telefone"
                 />
               )}
             />
@@ -185,9 +180,11 @@ function SignUp() {
               )}
             />
           )}
-          <Button type="submit">Enviar</Button>
-        </form>
-      </Flex>
+          <SubmitButton colorScheme="purple" type="submit">
+            Enviar
+          </SubmitButton>
+        </FormWrapper>
+      </Wrapper>
     </>
   )
 }
