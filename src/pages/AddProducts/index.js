@@ -3,33 +3,37 @@ import Header from '../../components/Header'
 import { FormControl, FormLabel, Input } from '@chakra-ui/react'
 import { FormHeading, FormWrapper, SubmitButton, Wrapper } from './styles'
 import { useForm } from 'react-hook-form'
+import SuccessMessage from '../../components/Notifications/sucess'
+import ErrorMessage from '../../components/Notifications/error'
 import 'react-phone-number-input/style.css'
 import axios from 'axios'
 import { AuthContext } from '../../contexts/authContext'
+import { useNavigate } from 'react-router-dom'
 
 function AddProduct() {
   const { register, handleSubmit } = useForm()
   const { token } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
-    try {
-      const response = await axios({
-        url: 'https://pop-pet-challenge.herokuapp.com/add-product',
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-type': 'application/json',
-        },
-        data: data,
-      })
+    const response = await axios({
+      url: 'https://pop-pet-challenge.herokuapp.com/add-product',
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+      data: data,
+    }).catch(function (error) {
+      return ErrorMessage(error.response.data)
+    })
 
-      if (response.status === 200) {
-        console.log('produto adicionado')
-      }
-    } catch (error) {
-      return error.message
+    if (response?.status === 200) {
+      console.log('produto adicionado')
+      SuccessMessage(response.data)
+      navigate('/admin')
     }
   }
 

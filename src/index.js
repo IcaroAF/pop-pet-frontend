@@ -6,6 +6,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { CartContextProvider } from './contexts/cartContext'
 import { AuthContextProvider } from './contexts/authContext'
 import { UserContextProvider } from './contexts/userContext'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +21,7 @@ ReactDOM.render(
         </UserContextProvider>
       </AuthContextProvider>
     </ChakraProvider>
+    <ToastContainer />
   </React.StrictMode>,
   document.getElementById('root')
 )

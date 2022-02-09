@@ -17,34 +17,34 @@ import { useForm } from 'react-hook-form'
 import { LoginButton, LoginInput, LogoutButton } from './styles'
 import { AuthContext } from '../../contexts/authContext'
 import { UserContext } from '../../contexts/userContext'
+import ErrorMessage from '../Notifications/error'
 
 function Login() {
   const { token, setToken } = useContext(AuthContext)
   const { setUser } = useContext(UserContext)
 
   const onSubmit = async (data) => {
-    try {
-      const response = await axios({
-        url: 'https://pop-pet-challenge.herokuapp.com/login',
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        data: data,
-      })
+    const response = await axios({
+      url: 'https://pop-pet-challenge.herokuapp.com/login',
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data: data,
+    }).catch(function (error) {
+      return ErrorMessage(error.response.data)
+    })
 
-      if (response.status === 200) {
-        setToken(response.data.token)
-        setUser(response.data.userLogged)
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('user', JSON.stringify(response.data.userLogged))
-      }
-    } catch (error) {
-      return error.message
+    if (response?.status === 200) {
+      setToken(response.data.token)
+      setUser(response.data.userLogged)
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('user', JSON.stringify(response.data.userLogged))
     }
   }
+
   const { register, handleSubmit } = useForm()
 
   function logout() {
