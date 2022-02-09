@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import Header from '../../components/Header'
 import { Checkbox, FormControl, FormLabel, Input } from '@chakra-ui/react'
 import { useForm, Controller } from 'react-hook-form'
-//import 'react-phone-number-input/style.css'
-//import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form'
+import SuccessMessage from '../../components/Notifications/sucess'
+import ErrorMessage from '../../components/Notifications/error'
 import axios from 'axios'
 import { AuthContext } from '../../contexts/authContext'
 import { UserContext } from '../../contexts/userContext'
@@ -17,31 +17,34 @@ function SignUp() {
   const navigate = useNavigate()
 
   const onSubmit = async (data) => {
-    try {
-      const { confirm_password, ...finalData } = data
-      if (confirm_password !== data.password) {
-        console.log('senha n bate')
-      }
-      const response = await axios({
-        url: 'https://pop-pet-challenge.herokuapp.com/users',
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        data: finalData,
-      })
+    const { confirm_password, ...finalData } = data
+    if (confirm_password !== data.password) {
+      console.log('senha n bate')
+    }
+    const response = await axios({
+      url: 'https://pop-pet-challenge.herokuapp.com/users',
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      data: finalData,
+    }).catch(function (error) {
+      return ErrorMessage(error.response.data)
+    })
 
-      if (response.status === 200) {
-        setToken(response.token)
-        setUser(response.userLogged)
-        localStorage.setItem('token', response.token)
-        localStorage.setItem('user', JSON.stringify(response?.userLogged))
-        navigate('/')
-      }
-    } catch (error) {
-      return error.message
+    if (response?.status === 200 && !user.is_admin) {
+      console.log(response)
+      SuccessMessage(response.data.message)
+      setToken(response.data.token)
+      setUser(response.data.userLogged)
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('user', JSON.stringify(response?.data.userLogged))
+      navigate('/')
+    } else {
+      navigate('/')
+      SuccessMessage(response?.data.message)
     }
   }
 

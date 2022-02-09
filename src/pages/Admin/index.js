@@ -32,6 +32,7 @@ function Admin() {
       }
     )
 
+    console.log(response)
     const data = await response.data
     setResumeData(data)
   }
