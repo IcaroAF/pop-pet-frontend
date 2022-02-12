@@ -4,4 +4,8 @@ const CartImg = styled.img`
   width: 150px;
 `
 
-export { CartImg }
+const CheckoutForm = styled.form`
+  flex: 1;
+`
+
+export { CartImg, CheckoutForm }
