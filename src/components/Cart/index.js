@@ -16,7 +16,7 @@ import { ReactComponent as MinusIcon } from '../../assets/minus-icon.svg'
 import TrashIcon from '../../assets/trash-icon.svg'
 import { CartSpam, CartButtonDiv, CartImg, ControlButton } from './styles'
 import { CartContext } from '../../contexts/cartContext'
-import { Flex, IconButton, Link, Text } from '@chakra-ui/react'
+import { Flex, IconButton, Link, Text, Box } from '@chakra-ui/react'
 import { formatToBRL } from 'brazilian-values'
 import { Link as ReachLink } from 'react-router-dom'
 
@@ -78,45 +78,47 @@ function Cart() {
           <DrawerCloseButton />
           <DrawerHeader fontSize="20px">Seu Carrinho</DrawerHeader>
 
-          <DrawerBody>
-            {cart.length > 0 &&
-              cart.map((product) => (
-                <Flex
-                  flexDirection="column"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  alignContent="space-between"
-                  key={product.id}
-                >
-                  <CartImg src={product.img} alt="img-produto" />
-                  <Text fontSize="2xl" align="center">
-                    {product.name}
-                  </Text>
-                  <Text fontSize="3xl" align="center">
-                    {formatToBRL(product.price / 100)}
-                  </Text>
-                  <Flex>
-                    <IconButton
-                      onClick={() => handleAddAmount(1, product.id)}
-                      icon={<PlusIcon />}
-                      disabled={product.amount > product.maxAmount}
-                    />
-                    <Text fontSize="2xl">{product.amount}</Text>
-                    <IconButton
-                      disabled={product.amount === 1}
-                      onClick={() => handleAddAmount(-1, product.id)}
-                      icon={<MinusIcon />}
-                    />
-                    {product.amount === 1 && (
-                      <ControlButton
+          <DrawerBody display="flex" flexDirection="column">
+            <Box>
+              {cart.length > 0 &&
+                cart.map((product) => (
+                  <Flex
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    alignContent="space-between"
+                    key={product.id}
+                  >
+                    <CartImg src={product.img} alt="img-produto" />
+                    <Text fontSize="2xl" align="center">
+                      {product.name}
+                    </Text>
+                    <Text fontSize="3xl" align="center">
+                      {formatToBRL(product.price / 100)}
+                    </Text>
+                    <Flex>
+                      <IconButton
+                        onClick={() => handleAddAmount(1, product.id)}
+                        icon={<PlusIcon />}
+                        disabled={product.amount > product.maxAmount}
+                      />
+                      <Text fontSize="2xl">{product.amount}</Text>
+                      <IconButton
+                        disabled={product.amount === 1}
                         onClick={() => handleAddAmount(-1, product.id)}
-                      >
-                        <img src={TrashIcon} />
-                      </ControlButton>
-                    )}
+                        icon={<MinusIcon />}
+                      />
+                      {product.amount === 1 && (
+                        <ControlButton
+                          onClick={() => handleAddAmount(-1, product.id)}
+                        >
+                          <img src={TrashIcon} />
+                        </ControlButton>
+                      )}
+                    </Flex>
                   </Flex>
-                </Flex>
-              ))}
+                ))}
+            </Box>
             <Text fontSize="4xl">{formatToBRL(total / 100)}</Text>
           </DrawerBody>
           <DrawerFooter>
